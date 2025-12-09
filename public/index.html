@@ -4,38 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Apotek Alfina Rizqy</title>
-
-  <!-- Tailwind CDN -->
+  
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Iconify -->
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-
-  <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- THEME COLOR VARIABLES -->
   <style>
     :root {
       --primary: #A80505;
       --primary-dark: #6C0000;
       --soft-bg: #F8FAFC;
     }
-    body { 
-      font-family: 'Poppins', sans-serif;
-    }
+    body { font-family: 'Poppins', sans-serif; }
   </style>
 
-  <script src="./controller/index.js"></script>
+  <script src="./controller/index.js" defer></script>
 </head>
 
 <body class="text-slate-800">
 
+  <!-- LOADING PAGE -->
   <div id="pageLoader" class="fixed inset-0 bg-white flex items-center justify-center z-[9999]">
     <div class="w-10 h-10 border-4 border-gray-300 border-t-[var(--primary)] rounded-full animate-spin"></div>
   </div>
 
-  <!-- ================= NAVBAR ================= -->
+  <!-- NAVBAR -->
   <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
 
@@ -62,16 +55,7 @@
         </div>
       </div>
 
-      <!-- NAV RIGHT -->
       <div class="flex items-center gap-4">
-
-        <!-- CART & PROFILE (HIDDEN) -->
-        <!-- 
-        <iconify-icon icon="mdi:cart-outline" class="text-2xl text-gray-600"></iconify-icon>
-        <img src="https://i.pravatar.cc/40" class="w-10 h-10 rounded-full border shadow-sm">
-        -->
-
-        <!-- LOGIN BUTTON -->
         <button class="px-4 py-2 bg-[var(--primary)] text-white rounded-md shadow 
                        hover:bg-[var(--primary-dark)] transition text-sm">
           Login
@@ -81,10 +65,9 @@
     </div>
   </nav>
 
-  <!-- SPACER -->
   <div class="h-20"></div>
 
-  <!-- ================= HERO ================= -->
+  <!-- HERO SECTION/PROMOTION BANNER -->
   <section class="max-w-6xl mx-auto px-4">
     <div class="relative w-full h-full rounded-xl overflow-hidden shadow-md group">
 
@@ -93,9 +76,7 @@
               class="absolute inset-0 w-full h-full object-cover transition-all duration-500">
       </div>
 
-      <!-- Tombol kiri -->
-      <button 
-        id="prevBtn"
+      <button id="prevBtn"
         class="absolute left-3 top-1/2 -translate-y-1/2 
               bg-black/40 text-white rounded-full 
               w-10 h-10 grid place-items-center 
@@ -103,9 +84,7 @@
         <iconify-icon icon="mdi:chevron-left" class="text-3xl"></iconify-icon>
       </button>
 
-      <!-- Tombol kanan -->
-      <button 
-        id="nextBtn"
+      <button id="nextBtn"
         class="absolute right-3 top-1/2 -translate-y-1/2 
               bg-black/40 text-white rounded-full 
               w-10 h-10 grid place-items-center
@@ -116,7 +95,7 @@
     </div>
   </section>
 
-  <!-- ================= PRODUK DISKON ================= -->
+  <!-- PRODUK DISKON -->
   <section class="max-w-6xl mx-auto px-4 mt-10">
     <div class="flex justify-between items-center mb-4">
       <h2 class="text-xl font-semibold text-[var(--primary-dark)]">Produk Diskon</h2>
@@ -125,188 +104,130 @@
       </a>
     </div>
 
-    <div id="produkDiskon" class="grid grid-cols-2 md:grid-cols-6 gap-4">
-
-      <!-- CARD -->
-      <!-- Gunakan copy untuk duplikasi -->
-      <a href="./model/detail_product.html" class="block">
-        <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
-          <img src="./assets/images/paracetamol.jpg" class="w-full aspect-square object-cover">
-          <div class="w-full h-px bg-gray-200"></div>
-          <div class="p-3 text-[13px]">
-            <p class="font-medium">Sanmol Paracetamol 500mg</p>
-            <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
-            <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000 <span class="line-through text-[12px] text-gray-500">Rp. 15.000</span></p>
-          </div>
-        </div>
-      </a>
-    </div>
+    <div id="produkDiskon" class="grid grid-cols-2 md:grid-cols-6 gap-4"></div>
   </section>
 
-
-
-  <!-- ================= PRODUK KAMI ================= -->
+  <!-- PRODUK KAMI -->
   <section class="max-w-6xl mx-auto px-4 mt-14 mb-16">
 
     <!-- HEADER -->
     <div class="flex items-center justify-between mb-4">
-      <div>
-        <h2 class="text-xl font-semibold text-[var(--primary-dark)]">Produk Kami</h2>
-      </div>
+      <h2 class="text-xl font-semibold text-[var(--primary-dark)]">Produk Kami</h2>
 
       <!-- FILTER -->
       <div class="relative" id="kategoriDropdown">
-  
-    <!-- Button -->
-    <button 
-      id="filterButton"
-      onclick="toggleFilterMenu()"
-      class="px-4 py-2 rounded-lg border border-red-300 bg-white shadow-sm 
-            hover:bg-red-50 flex items-center gap-2 text-sm text-[var(--primary)]">
-      <iconify-icon icon="mdi:filter-outline" class="text-[var(--primary)]"></iconify-icon>
-      <span>Filter</span>
-    </button>
-
-    <div id="filterMenu"
-      class="hidden absolute right-0 mt-2 w-72 bg-white border border-red-200 
-            rounded-lg shadow-xl p-4 z-50 text-sm">
-
-      <!-- TITLE -->
-      <p class="text-[var(--primary-dark)] font-semibold mb-2">Filter</p>
-
-      <!-- KATEGORI -->
-      <div class="mb-4">
-        <p class="font-medium mb-1">Kategori</p>
-
-        <div class="space-y-1">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="accent-[var(--primary)]" value="Obat" name="kategori">
-            Obat Bebas
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="accent-[var(--primary)]" value="Vitamin" name="kategori">
-            Vitamin
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="accent-[var(--primary)]" value="Alat Kesehatan" name="kategori">
-            Alat Kesehatan
-          </label>
-        </div>
-      </div>
-
-      <!-- BRAND -->
-      <div class="mb-4">
-        <p class="font-medium mb-1">Brand</p>
-
-        <div class="space-y-1">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="accent-[var(--primary)]" value="Sanmol" name="brand">
-            Antangin
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="accent-[var(--primary)]" value="Bodrex" name="brand">
-            Caplang
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="accent-[var(--primary)]" value="Paramex" name="brand">
-            Cetaphil
-          </label>
-        </div>
-      </div>
-
-      <!-- BUTTONS -->
-      <div class="flex justify-between mt-4">
-        <button onclick="applyFilter()" 
-          class="px-3 py-1.5 bg-[var(--primary)] text-white rounded-lg hover:bg-[var(--primary-dark)]">
-          Terapkan
+        <button id="filterButton"
+          class="px-4 py-2 rounded-lg border border-red-300 bg-white shadow-sm 
+                hover:bg-red-50 flex items-center gap-2 text-sm text-[var(--primary)]">
+          <iconify-icon icon="mdi:filter-outline"></iconify-icon>
+          <span>Filter</span>
         </button>
 
-        <button onclick="resetFilter()" 
-          class="px-3 py-1.5 border border-gray-300 rounded-lg hover:bg-gray-100">
-          Reset
-        </button>
-      </div>
+        <div id="filterMenu"
+          class="hidden absolute right-0 mt-2 w-72 bg-white border border-red-200 
+                rounded-lg shadow-xl p-4 z-50 text-sm">
 
-    </div>
+          <p class="text-[var(--primary-dark)] font-semibold mb-2">Filter</p>
 
-    </div>
-  </div>
-    </div>
+          <!-- KATEGORI -->
+          <div class="mb-4">
+            <p class="font-medium mb-1">Kategori</p>
+            <div class="space-y-1">
+              <label class="flex items-center gap-2">
+                <input type="checkbox" class="accent-[var(--primary)]" name="kategori" value="Obat">
+                Obat Bebas
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" class="accent-[var(--primary)]" name="kategori" value="Vitamin">
+                Vitamin
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" class="accent-[var(--primary)]" name="kategori" value="Alat Kesehatan">
+                Alat Kesehatan
+              </label>
+            </div>
+          </div>
 
-    <!-- GRID PRODUK (6 kolom × 3 baris = 18 produk) -->
-    <div id="produkSemua" class="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8">
+          <!-- BRAND -->
+          <div class="mb-4">
+            <p class="font-medium mb-1">Brand</p>
+            <div class="space-y-1">
+              <label class="flex items-center gap-2">
+                <input type="checkbox" class="accent-[var(--primary)]" name="brand" value="Antangin">
+                Antangin
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" class="accent-[var(--primary)]" name="brand" value="Caplang">
+                Caplang
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" class="accent-[var(--primary)]" name="brand" value="Cetaphil">
+                Cetaphil
+              </label>
+            </div>
+          </div>
 
-      <!-- Repeat 18 Cards -->
-      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
-        <img src="./assets/images/paracetamol.jpg" class="w-full aspect-square object-cover">
-        <div class="w-full h-px bg-gray-200"></div>
-        <div class="p-3 text-[13px]">
-          <p class="font-medium">Paracetamol 500 mg Tablet First Medifarma</p>
-          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
-          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+          <!-- TOMBOL -->
+          <div class="flex justify-between mt-4">
+            <button id="applyFilterBtn"
+              class="px-3 py-1.5 bg-[var(--primary)] text-white rounded-lg hover:bg-[var(--primary-dark)]">
+              Terapkan
+            </button>
+
+            <button id="resetFilterBtn"
+              class="px-3 py-1.5 border border-gray-300 rounded-lg hover:bg-gray-100">
+              Reset
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <!-- PAGINATION -->
+    <!-- PRODUK GRID -->
+    <div id="produkSemua" class="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8"></div>
+
+    <!-- HALAMAN PRODUK -->
     <div class="flex items-center justify-between text-sm">
       <p class="text-gray-500">
         Halaman <span class="font-semibold">1</span> dari <span class="font-semibold">5</span>
       </p>
 
       <div class="flex items-center gap-1">
-        <button class="px-3 py-1 rounded-lg border text-gray-600 hover:bg-gray-100 disabled:opacity-40" disabled>
-          Prev
-        </button>
+        <button class="px-3 py-1 rounded-lg border text-gray-600 hover:bg-gray-100" disabled>Prev</button>
 
-        <button class="px-3 py-1 rounded-lg border bg-[var(--primary)] text-white">
-          1
-        </button>
+        <button class="px-3 py-1 rounded-lg border bg-[var(--primary)] text-white">1</button>
         <button class="px-3 py-1 rounded-lg border hover:bg-gray-100">2</button>
         <button class="px-3 py-1 rounded-lg border hover:bg-gray-100">3</button>
         <span class="px-2">...</span>
         <button class="px-3 py-1 rounded-lg border hover:bg-gray-100">5</button>
 
-        <button class="px-3 py-1 rounded-lg border text-gray-600 hover:bg-gray-100">
-          Next
-        </button>
+        <button class="px-3 py-1 rounded-lg border text-gray-600 hover:bg-gray-100">Next</button>
       </div>
     </div>
 
   </section>
 
-  <!-- ================= LOKASI & KONTAK ================= -->
+  <!-- TENTANG KAMI -->
   <section class="max-w-6xl mx-auto px-4 mt-20 mb-20">
-
-    <!-- WRAPPER UTAMA (shadow dihapus) -->
     <div class="rounded-xl p-6">
 
-      <!-- TITLE CENTER -->
       <h2 class="text-2xl font-semibold text-[var(--primary-dark)] text-center mb-8">
         Tentang Kami
       </h2>
 
-      <!-- GRID 2 KOLOM -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        <!-- LEFT: CONTACT CARD (ADA SHADOWNYA) -->
+        <!-- INFORMASI KONTAK -->
         <div class="bg-white shadow-md border border-[var(--primary)]/20 rounded-xl p-5 space-y-4">
-
-          <!-- CUSTOMER CARE -->
           <div class="flex items-start gap-4">
-            <div class="text-[var(--primary)]">
-              <iconify-icon icon="mdi:headset" class="text-5xl"></iconify-icon>
-            </div>
+            <iconify-icon icon="mdi:headset" class="text-5xl text-[var(--primary)]"></iconify-icon>
 
             <div>
-              <p class="font-semibold text-[var(--primary-dark)] text-lg">
-                ADMIN ALFINA RIZQY
-              </p>
+              <p class="font-semibold text-[var(--primary-dark)] text-lg">ADMIN ALFINA RIZQY</p>
               <p class="text-gray-500 text-sm">WhatsApp Only</p>
 
-              <p class="text-[var(--primary)] font-bold text-xl mt-1">
-                0851 7238 2846
-              </p>
+              <p class="text-[var(--primary)] font-bold text-xl mt-1">0851 7238 2846</p>
               <p class="text-gray-500 text-sm">07:00 - 21:00 WIB</p>
 
               <a href="https://wa.me/6285172382846" target="_blank"
@@ -316,12 +237,9 @@
             </div>
           </div>
 
-          <!-- DIVIDER -->
           <div class="w-full h-px bg-gray-200"></div>
 
-          <!-- QUICK INFO LIST -->
           <div class="space-y-3">
-
             <div class="flex items-start gap-3">
               <iconify-icon icon="mdi:map-marker" class="text-xl text-[var(--primary)]"></iconify-icon>
               <p class="text-gray-700 text-sm">
@@ -338,11 +256,10 @@
               <iconify-icon icon="mdi:check-decagram" class="text-xl text-[var(--primary)]"></iconify-icon>
               <p class="text-gray-700 text-sm">100% Produk Asli & Bergaransi</p>
             </div>
-
           </div>
         </div>
 
-        <!-- RIGHT: GOOGLE MAP -->
+        <!-- MAP -->
         <div class="w-full h-80 rounded-lg overflow-hidden border border-[var(--primary)]/30 shadow-md">
           <iframe
             class="w-full h-full"
@@ -357,23 +274,18 @@
     </div>
   </section>
 
-  <!-- ================= FOOTER ================= -->
+  <!-- FOOTER -->
   <footer class="bg-[var(--soft-bg)] border-t border-gray-200 mt-10">
     <div class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm text-gray-600">
 
-      <!-- LOGO + DESKRIPSI -->
       <div class="space-y-3">
-        <img src="./assets/images/logo_apotek.png" class="h-12 object-contain" alt="Logo Apotek">
-        <p class="leading-relaxed">
-          Apotek Alfina Rizqy menyediakan berbagai obat, vitamin, dan alat kesehatan 
-          dengan harga terjangkau serta pelayanan terbaik.
-        </p>
+        <img src="./assets/images/logo_apotek.png" class="h-12 object-contain">
+        <p>Apotek Alfina Rizqy menyediakan berbagai obat, vitamin, dan alat kesehatan.</p>
         <p class="text-gray-500 text-xs mt-4">
           © 2025 Apotek Alfina Rizqy. All rights reserved.
         </p>
       </div>
 
-      <!-- MENU -->
       <div class="grid grid-cols-2 gap-8">
         <div>
           <h3 class="font-semibold text-gray-800 mb-3">Menu</h3>
@@ -396,7 +308,6 @@
         </div>
       </div>
 
-      <!-- KONTAK -->
       <div class="space-y-3">
         <h3 class="font-semibold text-gray-800 mb-3">Kontak</h3>
 
@@ -412,47 +323,15 @@
           alfinarizqy@gmail.com
         </p>
 
-        <!-- SOSMED -->
         <div class="flex gap-3 mt-4 text-xl text-gray-700">
-          <iconify-icon icon="mdi:facebook" class="hover:text-[var(--primary)] cursor-pointer"></iconify-icon>
-          <iconify-icon icon="mdi:instagram" class="hover:text-[var(--primary)] cursor-pointer"></iconify-icon>
-          <iconify-icon icon="mdi:twitter" class="hover:text-[var(--primary)] cursor-pointer"></iconify-icon>
+          <iconify-icon icon="mdi:facebook" class="hover:text-[var(--primary)]"></iconify-icon>
+          <iconify-icon icon="mdi:instagram" class="hover:text-[var(--primary)]"></iconify-icon>
+          <iconify-icon icon="mdi:twitter" class="hover:text-[var(--primary)]"></iconify-icon>
         </div>
       </div>
 
     </div>
   </footer>
-
-  <!-- SCRIPT: Toggle Filter -->
-  <script>
-    function toggleFilterMenu() {
-      document.getElementById("filterMenu").classList.toggle("hidden");
-    }
-
-    document.addEventListener("click", function(e) {
-      const button = document.getElementById("filterButton");
-      const menu = document.getElementById("filterMenu");
-
-      if (!button.contains(e.target) && !menu.contains(e.target)) {
-        menu.classList.add("hidden");
-      }
-    });
-
-    function applyFilter() {
-      let kategoriSelected = [...document.querySelectorAll("input[name='kategori']:checked")].map(el => el.value);
-      let brandSelected = [...document.querySelectorAll("input[name='brand']:checked")].map(el => el.value);
-
-      console.log("Kategori:", kategoriSelected);
-      console.log("Brand:", brandSelected);
-
-      // Nanti bisa kamu gunakan untuk filter produk
-      document.getElementById("filterMenu").classList.add("hidden");
-    }
-
-    function resetFilter() {
-      document.querySelectorAll("input[name='kategori'], input[name='brand']").forEach(el => el.checked = false);
-    }
-    </script>
 
 </body>
 </html>

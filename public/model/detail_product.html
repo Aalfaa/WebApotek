@@ -17,16 +17,17 @@
     body { font-family: 'Poppins', sans-serif; }
   </style>
 
-  <script src="../controller/detail_product.js"></script>
+  <script src="../controller/detail_product.js" defer></script>
 </head>
 
 <body class="text-slate-800">
 
+  <!-- LOADER -->
   <div id="pageLoader" class="fixed inset-0 bg-white flex items-center justify-center z-[9999]">
     <div class="w-10 h-10 border-4 border-gray-300 border-t-[var(--primary)] rounded-full animate-spin"></div>
   </div>
 
-    <!-- ================= NAVBAR (DARI KODE RATU) ================= -->
+  <!-- NAVBAR -->
   <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
 
@@ -58,17 +59,14 @@
     </div>
   </nav>
 
-
-  <!-- SPACER -->
   <div class="h-24"></div>
 
   <!-- ================= DETAIL PRODUK ================= -->
   <div class="max-w-6xl mx-auto px-4 py-6">
 
-    <!-- GRID 3 KOLOM -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
 
-      <!-- ========== KOLOM 1: GAMBAR PRODUK ========== -->
+      <!-- GAMBAR PRODUK -->
       <div class="md:col-span-4 flex justify-center">
         <div class="w-full">
 
@@ -79,18 +77,18 @@
                 class="w-full h-full object-contain p-4">
           </div>
 
-          <!-- THUMBNAILS -->
+          <!-- THUMBNAIL -->
           <div class="grid grid-cols-3 gap-3 mt-4">
 
-            <img onclick="setMainImg('../assets/images/paracetamol.jpg')" 
+            <img data-img="../assets/images/paracetamol.jpg"
                 src="../assets/images/paracetamol.jpg"
                 class="thumb aspect-square w-full object-contain rounded-lg cursor-pointer hover:opacity-70 transition bg-white p-1">
 
-            <img onclick="setMainImg('../assets/images/alur_pengiriman.jpg')"
+            <img data-img="../assets/images/alur_pengiriman.jpg"
                 src="../assets/images/alur_pengiriman.jpg"
                 class="thumb aspect-square w-full object-contain rounded-lg cursor-pointer hover:opacity-70 transition bg-white p-1">
 
-            <img onclick="setMainImg('../assets/images/thanks.png')"
+            <img data-img="../assets/images/thanks.png"
                 src="../assets/images/thanks.png"
                 class="thumb aspect-square w-full object-contain rounded-lg cursor-pointer hover:opacity-70 transition bg-white p-1">
 
@@ -99,8 +97,7 @@
         </div>
       </div>
 
-
-      <!-- ========== KOLOM 2: DESKRIPSI PRODUK ========== -->
+      <!-- DESKRIPSI -->
       <div class="md:col-span-5 space-y-2">
 
         <h1 class="text-[26px] font-semibold leading-tight">
@@ -113,14 +110,11 @@
 
         <p class="font-semibold text-gray-900">Product Description</p>
 
-        <!-- SHORT DESC -->
         <p id="shortDesc" class="text-sm text-gray-700">
-          Paracetamol 500 mg Tablet merupakan obat yang dapat digunakan untuk meringankan rasa sakit pada sakit kepala, sakit gigi, dan menurunkan demam. Paracetamol bekerja pada pusat pengatur suhu di hipotalamus untuk menurunkan suhu tubuh (antipiretik) serta menghambat sintesis prostaglandin sehingga dapat mengurangi nyeri ringan sampai sedang (analgesik).
+          Paracetamol 500 mg Tablet merupakan obat yang dapat digunakan untuk meringankan rasa sakit...
         </p>
 
-        <!-- FULL DESCRIPTION -->
         <div id="fullDesc" class="hidden text-sm text-gray-700 space-y-4 py-2">
-
           <p><strong>Indikasi Umum:</strong><br>
           Obat ini digunakan untuk meredakan nyeri ringan hingga sedang seperti sakit kepala, sakit gigi, nyeri otot, serta menurunkan demam.</p>
 
@@ -146,7 +140,6 @@
           <p><strong>Kemasan:</strong> 1 Strip @ 10 Tablet</p>
           <p><strong>Manufaktur:</strong> First Medifarma</p>
           <p><strong>No. Registrasi:</strong> BPOM: GBL9607102904A1</p>
-
         </div>
 
         <button id="toggleDesc"
@@ -156,8 +149,7 @@
 
       </div>
 
-
-      <!-- ========== KOLOM 3: KERANJANG ========== -->
+      <!-- KERANJANG -->
       <div class="md:col-span-3">
         <div class="bg-white border rounded-xl shadow p-5 top-28">
           <h3 class="font-semibold mb-3">Opsi Keranjang</h3>
@@ -173,13 +165,13 @@
 
   </div>
 
-  <!-- ================= FOOTER (DARI KODE RATU) ================= -->
+  <!-- FOOTER -->
   <footer class="bg-[var(--soft-bg)] border-t mt-10">
     <div class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm text-gray-600">
 
       <div class="space-y-3">
-        <img src="../assets/images/logo_apotek.png" class="h-12 object-contain" alt="Logo Apotek">
-        <p>Apotek Alfina Rizqy menyediakan berbagai obat, vitamin dan alat kesehatan.</p>
+        <img src="../assets/images/logo_apotek.png" class="h-12 object-contain">
+        <p>Apotek Alfina Rizqy menyediakan berbagai obat & vitamin.</p>
         <p class="text-xs text-gray-500">© 2025 Apotek Alfina Rizqy</p>
       </div>
 
@@ -221,28 +213,6 @@
 
     </div>
   </footer>
-
-</body>
-
-<!-- SCRIPT: SWITCH GAMBAR -->
-<script>
-function setMainImg(src) {
-  document.getElementById('mainImg').src = src;
-}
-</script>
-
-<!-- SCRIPT: LIHAT SELENGKAPNYA -->
-<script>
-const btn = document.getElementById("toggleDesc");
-const full = document.getElementById("fullDesc");
-let open = false;
-
-btn.onclick = () => {
-  open = !open;
-  full.classList.toggle("hidden");
-  btn.textContent = open ? "Sembunyikan" : "Lihat Selengkapnya";
-};
-</script>
 
 </body>
 </html>
