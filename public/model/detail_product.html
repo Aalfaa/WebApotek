@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Produk – Apotek Alfina Rizqy</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #A80505;
+      --primary-dark: #6C0000;
+      --soft-bg: #F8FAFC;
+    }
+    body { font-family: 'Poppins', sans-serif; }
+  </style>
+
+  <script src="../controller/detail_product.js"></script>
+</head>
+
+<body class="text-slate-800">
+
+  <div id="pageLoader" class="fixed inset-0 bg-white flex items-center justify-center z-[9999]">
+    <div class="w-10 h-10 border-4 border-gray-300 border-t-[var(--primary)] rounded-full animate-spin"></div>
+  </div>
+
+    <!-- ================= NAVBAR (DARI KODE RATU) ================= -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+
+      <a href="../index.html">
+        <div class="flex items-center gap-2">
+          <img src="../assets/images/logo_apotek.png" class="h-[50px] object-contain" alt="Logo">
+        </div>
+      </a>
+
+      <div class="flex-1 px-6">
+        <div class="relative">
+          <iconify-icon icon="mdi:magnify"
+            class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl"></iconify-icon>
+
+          <input type="text"
+                placeholder="Cari produk di Apotek Alfina Rizqy"
+                class="w-[500px] border rounded-lg py-2 pl-10 pr-3 text-sm
+                        outline outline-1 outline-gray-400 focus:outline-[var(--primary)] bg-white">
+        </div>
+      </div>
+
+      <div>
+        <button class="px-4 py-2 bg-[var(--primary)] text-white rounded-md shadow 
+                      hover:bg-[var(--primary-dark)] transition text-sm">
+          Login
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- SPACER -->
+  <div class="h-24"></div>
+
+  <!-- ================= DETAIL PRODUK ================= -->
+  <div class="max-w-6xl mx-auto px-4 py-6">
+
+    <!-- GRID 3 KOLOM -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+
+      <!-- ========== KOLOM 1: GAMBAR PRODUK ========== -->
+      <div class="md:col-span-4 flex justify-center">
+        <div class="w-full">
+
+          <!-- GAMBAR UTAMA -->
+          <div class="rounded-xl overflow-hidden shadow-sm bg-white w-full aspect-square flex items-center justify-center">
+            <img id="mainImg" 
+                src="../assets/images/paracetamol.jpg" 
+                class="w-full h-full object-contain p-4">
+          </div>
+
+          <!-- THUMBNAILS -->
+          <div class="grid grid-cols-3 gap-3 mt-4">
+
+            <img onclick="setMainImg('../assets/images/paracetamol.jpg')" 
+                src="../assets/images/paracetamol.jpg"
+                class="thumb aspect-square w-full object-contain rounded-lg cursor-pointer hover:opacity-70 transition bg-white p-1">
+
+            <img onclick="setMainImg('../assets/images/alur_pengiriman.jpg')"
+                src="../assets/images/alur_pengiriman.jpg"
+                class="thumb aspect-square w-full object-contain rounded-lg cursor-pointer hover:opacity-70 transition bg-white p-1">
+
+            <img onclick="setMainImg('../assets/images/thanks.png')"
+                src="../assets/images/thanks.png"
+                class="thumb aspect-square w-full object-contain rounded-lg cursor-pointer hover:opacity-70 transition bg-white p-1">
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ========== KOLOM 2: DESKRIPSI PRODUK ========== -->
+      <div class="md:col-span-5 space-y-2">
+
+        <h1 class="text-[26px] font-semibold leading-tight">
+          Paracetamol 500 mg Tablet First Medifarma (10 Tablet)
+        </h1>
+
+        <p class="text-[30px] font-bold">Rp 15.000</p>
+
+        <div class="border-b mb-3"></div>
+
+        <p class="font-semibold text-gray-900">Product Description</p>
+
+        <!-- SHORT DESC -->
+        <p id="shortDesc" class="text-sm text-gray-700">
+          Paracetamol 500 mg Tablet merupakan obat yang dapat digunakan untuk meringankan rasa sakit pada sakit kepala, sakit gigi, dan menurunkan demam. Paracetamol bekerja pada pusat pengatur suhu di hipotalamus untuk menurunkan suhu tubuh (antipiretik) serta menghambat sintesis prostaglandin sehingga dapat mengurangi nyeri ringan sampai sedang (analgesik).
+        </p>
+
+        <!-- FULL DESCRIPTION -->
+        <div id="fullDesc" class="hidden text-sm text-gray-700 space-y-4 py-2">
+
+          <p><strong>Indikasi Umum:</strong><br>
+          Obat ini digunakan untuk meredakan nyeri ringan hingga sedang seperti sakit kepala, sakit gigi, nyeri otot, serta menurunkan demam.</p>
+
+          <p><strong>Komposisi:</strong><br>
+          Paracetamol 500 mg.</p>
+
+          <p><strong>Dosis:</strong><br>
+          Dewasa: 1-2 kaplet, 3-4 kali per hari. Penggunaan maximum 8 kaplet per hari. Anak 7-12 tahun : 0.5 1 kaplet, 3-4 kali per hari. Penggunaan maximum 4 kaplet per hari.</p>
+
+          <p><strong>Aturan Pakai:</strong><br>
+          Obat dapat diminum sebelum atau sesudah makan.</p>
+
+          <p><strong>Perhatian:</strong><br>
+          Hati-hati penggunaan pada pasien dengan gagal ginjal, gangguan fungsi hati, dan alergi atau mengalami hipersensitivitas terhadap paracetamol.</p>
+
+          <p><strong>Kontra Indikasi:</strong><br>
+          Parasetamol jangan diberikan kepada penderita hipersensitif/alergi terhadap Paracetamol. Penderita gangguan fungsi hati berat.</p>
+
+          <p><strong>Efek Samping:</strong><br>
+          Demam, mual, nyeri lambung, kehilangan nafsu makan, urin berwarna gelap, tinja / kotoran berwarna coklat kemerahan, mata atau kulit berwarna kuning, tinja/kotoran berdarah atau berwarna hitam.</p>
+
+          <p><strong>Golongan Produk:</strong> Obat Bebas (Hijau)</p>
+          <p><strong>Kemasan:</strong> 1 Strip @ 10 Tablet</p>
+          <p><strong>Manufaktur:</strong> First Medifarma</p>
+          <p><strong>No. Registrasi:</strong> BPOM: GBL9607102904A1</p>
+
+        </div>
+
+        <button id="toggleDesc"
+                class="text-[var(--primary)] font-semibold hover:text-[var(--primary-dark)] mt-2">
+          Lihat Selengkapnya
+        </button>
+
+      </div>
+
+
+      <!-- ========== KOLOM 3: KERANJANG ========== -->
+      <div class="md:col-span-3">
+        <div class="bg-white border rounded-xl shadow p-5 top-28">
+          <h3 class="font-semibold mb-3">Opsi Keranjang</h3>
+
+          <button class="w-full py-3 rounded-lg bg-[var(--primary)] text-white font-medium
+                        hover:bg-[var(--primary-dark)] transition">
+            Tambah Keranjang
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= FOOTER (DARI KODE RATU) ================= -->
+  <footer class="bg-[var(--soft-bg)] border-t mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm text-gray-600">
+
+      <div class="space-y-3">
+        <img src="../assets/images/logo_apotek.png" class="h-12 object-contain" alt="Logo Apotek">
+        <p>Apotek Alfina Rizqy menyediakan berbagai obat, vitamin dan alat kesehatan.</p>
+        <p class="text-xs text-gray-500">© 2025 Apotek Alfina Rizqy</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-semibold mb-3">Menu</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-[var(--primary)]">Beranda</a></li>
+            <li><a href="#" class="hover:text-[var(--primary)]">Produk</a></li>
+            <li><a href="#" class="hover:text-[var(--primary)]">Promo</a></li>
+            <li><a href="#" class="hover:text-[var(--primary)]">Tentang Kami</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold mb-3">Bantuan</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-[var(--primary)]">FAQ</a></li>
+            <li><a href="#" class="hover:text-[var(--primary)]">Cara Belanja</a></li>
+            <li><a href="#" class="hover:text-[var(--primary)]">Syarat & Ketentuan</a></li>
+            <li><a href="#" class="hover:text-[var(--primary)]">Kebijakan Privasi</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <h3 class="font-semibold mb-3">Kontak</h3>
+
+        <p>Dusun Baton, Desa Patereman,<br>Modung, Bangkalan</p>
+
+        <p class="flex items-center gap-2">
+          <iconify-icon icon="mdi:whatsapp"></iconify-icon> +62 851-7238-2846
+        </p>
+
+        <p class="flex items-center gap-2">
+          <iconify-icon icon="mdi:email-outline"></iconify-icon> alfinarizqy@gmail.com
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+
+<!-- SCRIPT: SWITCH GAMBAR -->
+<script>
+function setMainImg(src) {
+  document.getElementById('mainImg').src = src;
+}
+</script>
+
+<!-- SCRIPT: LIHAT SELENGKAPNYA -->
+<script>
+const btn = document.getElementById("toggleDesc");
+const full = document.getElementById("fullDesc");
+let open = false;
+
+btn.onclick = () => {
+  open = !open;
+  full.classList.toggle("hidden");
+  btn.textContent = open ? "Sembunyikan" : "Lihat Selengkapnya";
+};
+</script>
+
+</body>
+</html>
