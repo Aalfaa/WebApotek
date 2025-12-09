@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apotek Alfina Rizqy</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- THEME COLOR VARIABLES -->
+  <style>
+    :root {
+      --primary: #920303;
+      --primary-dark: #6C0000;
+      --soft-bg: #FDF7F7;
+    }
+    body { 
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+
+  <script src="./controller/index.js"></script>
+</head>
+
+<body class="text-slate-800">
+
+  <!-- ================= NAVBAR ================= -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+
+      <!-- LOGO -->
+      <div class="flex items-center gap-2">
+        <img src="./assets/images/logo_apotek.png" class="h-[50px] w-full object-contain" alt="Logo">
+      </div>
+
+      <!-- SEARCH BAR -->
+      <div class="flex-1 px-6">
+        <div class="relative">
+          <iconify-icon 
+            icon="mdi:magnify"
+            class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl">
+          </iconify-icon>
+
+          <input 
+            type="text"
+            placeholder="Cari produk di Apotek Alfina Rizqy"
+            class="w-[500px] border rounded-lg py-2 pl-10 pr-3 text-sm
+                   outline outline-1 outline-gray-400 focus:outline-[var(--primary)] bg-white">
+        </div>
+      </div>
+
+      <!-- NAV RIGHT -->
+      <div class="flex items-center gap-4">
+
+        <!-- CART & PROFILE (HIDDEN) -->
+        <!-- 
+        <iconify-icon icon="mdi:cart-outline" class="text-2xl text-gray-600"></iconify-icon>
+        <img src="https://i.pravatar.cc/40" class="w-10 h-10 rounded-full border shadow-sm">
+        -->
+
+        <!-- LOGIN BUTTON -->
+        <button class="px-4 py-2 bg-[var(--primary)] text-white rounded-md shadow 
+                       hover:bg-[var(--primary-dark)] transition text-sm">
+          Login
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- SPACER -->
+  <div class="h-20"></div>
+
+  <!-- ================= HERO ================= -->
+  <section class="max-w-6xl mx-auto px-4">
+    <div class="relative w-full h-full rounded-xl overflow-hidden shadow-md group">
+
+      <div id="hero" class="relative aspect-[1430/477] overflow-hidden rounded-xl">
+          <img id="heroImg" src="./assets/images/banner_1.png"
+              class="absolute inset-0 w-full h-full object-cover transition-all duration-500">
+      </div>
+
+      <!-- Tombol kiri -->
+      <button 
+        id="prevBtn"
+        class="absolute left-3 top-1/2 -translate-y-1/2 
+              bg-black/40 text-white rounded-full 
+              w-10 h-10 grid place-items-center 
+              opacity-0 group-hover:opacity-100 transition">
+        <iconify-icon icon="mdi:chevron-left" class="text-3xl"></iconify-icon>
+      </button>
+
+      <!-- Tombol kanan -->
+      <button 
+        id="nextBtn"
+        class="absolute right-3 top-1/2 -translate-y-1/2 
+              bg-black/40 text-white rounded-full 
+              w-10 h-10 grid place-items-center
+              opacity-0 group-hover:opacity-100 transition">
+        <iconify-icon icon="mdi:chevron-right" class="text-3xl"></iconify-icon>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- ================= PRODUK DISKON ================= -->
+  <section class="max-w-6xl mx-auto px-4 mt-10">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold text-[var(--primary-dark)]">Produk Diskon</h2>
+      <a href="#" class="text-[var(--primary)] font-medium hover:text-[var(--primary-dark)]">
+        Lihat semua →
+      </a>
+    </div>
+
+    <div id="produkDiskon" class="grid grid-cols-2 md:grid-cols-6 gap-4">
+
+      <!-- CARD -->
+      <!-- Gunakan copy untuk duplikasi -->
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000 <span class="line-through text-[12px] text-gray-500">Rp. 15.000</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ================= PRODUK KAMI ================= -->
+  <section class="max-w-6xl mx-auto px-4 mt-14 mb-16">
+
+    <!-- HEADER -->
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="text-xl font-semibold text-[var(--primary-dark)]">Produk Kami</h2>
+      </div>
+
+      <!-- FILTER -->
+      <div class="relative" id="filterBox">
+        <button onclick="toggleFilter()"
+          class="px-4 py-2 rounded-lg border border-red-300 bg-white shadow-sm 
+                 hover:bg-red-50 flex items-center gap-2 text-sm text-[var(--primary)]">
+          <iconify-icon icon="mdi:filter-outline" class="text-[var(--primary)]"></iconify-icon>
+          <span>Filter</span>
+        </button>
+
+        <div id="filterMenu"
+          class="hidden absolute right-0 mt-2 w-64 bg-white border border-red-200 rounded-lg shadow-lg p-4 z-40 text-sm">
+
+          <div class="mb-3">
+            <label class="font-medium">Kategori</label>
+            <select class="w-full border rounded-lg py-1.5 px-2">
+              <option>Semua Kategori</option>
+              <option>Obat</option>
+              <option>Vitamin</option>
+              <option>Alat Kesehatan</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="font-medium">Brand</label>
+            <select class="w-full border rounded-lg py-1.5 px-2">
+              <option>Semua Brand</option>
+              <option>Sanmol</option>
+              <option>Bodrex</option>
+              <option>Paramex</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- GRID PRODUK (6 kolom × 3 baris = 18 produk) -->
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8">
+
+      <!-- Repeat 18 Cards -->
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+
+      <!-- Duplicate untuk total 18 produk -->
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl drop-shadow-md overflow-hidden border border-[var(--primary)]/20 hover:shadow-lg transition">
+        <img src="./assets/images/sanmol.jpg" class="w-full aspect-square object-cover">
+        <div class="w-full h-px bg-gray-200"></div>
+        <div class="p-3 text-[13px]">
+          <p class="font-medium">Sanmol Paracetamol 500mg</p>
+          <p class="text-[12px] text-gray-500 mt-1">Obat Bebas</p>
+          <p class="text-[var(--primary)] mt-1 font-semibold">Rp. 14.000</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="flex items-center justify-between text-sm">
+      <p class="text-gray-500">
+        Halaman <span class="font-semibold">1</span> dari <span class="font-semibold">5</span>
+      </p>
+
+      <div class="flex items-center gap-1">
+        <button class="px-3 py-1 rounded-lg border text-gray-600 hover:bg-gray-100 disabled:opacity-40" disabled>
+          Prev
+        </button>
+
+        <button class="px-3 py-1 rounded-lg border bg-[var(--primary)] text-white">
+          1
+        </button>
+        <button class="px-3 py-1 rounded-lg border hover:bg-gray-100">2</button>
+        <button class="px-3 py-1 rounded-lg border hover:bg-gray-100">3</button>
+        <span class="px-2">...</span>
+        <button class="px-3 py-1 rounded-lg border hover:bg-gray-100">5</button>
+
+        <button class="px-3 py-1 rounded-lg border text-gray-600 hover:bg-gray-100">
+          Next
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+
+
+  <!-- ================= LOKASI & KONTAK ================= -->
+  <section class="max-w-6xl mx-auto px-4 mt-20 mb-20">
+
+    <div class="bg-white rounded-xl shadow-md border border-[var(--primary)]/20 p-6">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- INFORMASI -->
+        <div class="space-y-5 text-[14px]">
+
+          <h2 class="text-xl font-semibold text-[var(--primary-dark)] mb-4">Tentang Kami</h2>
+
+          <div>
+            <p class="font-medium text-slate-700">Alamat</p>
+            <p class="text-gray-600">Jl. Contoh No. 123, Malang, Jawa Timur</p>
+          </div>
+
+          <div>
+            <p class="font-medium text-slate-700">WhatsApp</p>
+            <p class="text-gray-600">+62 851-7238-2846</p>
+          </div>
+
+          <div>
+            <p class="font-medium text-slate-700">Email</p>
+            <p class="text-gray-600">admin@alfina-rizqy.com</p>
+          </div>
+
+          <div>
+            <p class="font-medium text-slate-700">Jam Buka</p>
+            <p class="text-gray-600">07.00 - 20.00</p>
+          </div>
+
+        </div>
+
+        <!-- GOOGLE MAP -->
+        <div class="w-full h-72 rounded-lg overflow-hidden border border-[var(--primary)]/30">
+          <iframe
+            class="w-full h-full"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4202756416253!2d113.0239261!3d-7.2097465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd78b2132044b13%3A0x5e9da11481bdf570!2sAPOTEK%20ALFINA%20RIZQY!5e1!3m2!1sen!2sid!4v1765300678656!5m2!1sen!2sid"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-[var(--primary-dark)] text-gray-200 py-12">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+      <div>
+        <h3 class="text-white font-semibold mb-3">Contact</h3>
+        <p>123 Road, Dhaka, Bangladesh</p>
+        <p>+880707060700</p>
+        <p>sajiburdanto21@gmail.com</p>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-3">Quick Links</h3>
+        <p>Home</p>
+        <p>About</p>
+        <p>Services</p>
+        <p>Careers</p>
+        <p>Contact</p>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-3">Specialties</h3>
+        <p>Anesthesiology</p>
+        <p>Psychiatry</p>
+        <p>General surgery</p>
+        <p>Family medicine</p>
+        <p>Pediatrics</p>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-3">Social Media</h3>
+        <div class="flex gap-4 text-2xl">
+          <iconify-icon icon="mdi:facebook"></iconify-icon>
+          <iconify-icon icon="mdi:instagram"></iconify-icon>
+          <iconify-icon icon="mdi:linkedin"></iconify-icon>
+          <iconify-icon icon="mdi:twitter"></iconify-icon>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center text-sm text-gray-400 mt-6">
+      © 2025 Apotek Alfina Rizqy. All rights reserved.
+    </div>
+  </footer>
+
+
+
+  <!-- SCRIPT: Toggle Filter -->
+  <script>
+    function toggleFilter() {
+      const menu = document.getElementById('filterMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', function(e) {
+      const box = document.getElementById('filterBox');
+      const menu = document.getElementById('filterMenu');
+      if (!box.contains(e.target)) menu.classList.add('hidden');
+    });
+  </script>
+
+</body>
+</html>
