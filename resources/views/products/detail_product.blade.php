@@ -5,6 +5,22 @@
     <div class="w-10 h-10 border-4 border-gray-300 border-t-[var(--primary)] rounded-full animate-spin"></div>
   </div>
 
+  <!-- Custom Alert Modal -->
+  <div id="customAlert" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[10000] hidden opacity-0 transition-opacity duration-300">
+    <div id="alertBox" class="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full mx-4 transform scale-90 transition-transform duration-300">
+      <div class="flex flex-col items-center text-center">
+        <div id="alertIcon" class="w-16 h-16 rounded-full flex items-center justify-center mb-4">
+          <!-- Icon will be inserted here -->
+        </div>
+        <h3 id="alertTitle" class="text-xl font-bold text-gray-800 mb-2"></h3>
+        <p id="alertMessage" class="text-gray-600 mb-6"></p>
+        <button id="alertBtn" class="w-full py-3 rounded-lg font-medium transition shadow-md active:scale-95 transform-gpu">
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+
   @php
     $harga = (int)($obat->harga ?? 0);
     $diskon = (int)($obat->diskon_persen ?? 0);
@@ -140,6 +156,58 @@
   </div>
 
   <script>
+    // Custom Alert Function
+    function showAlert(title, message, type = 'info', callback = null) {
+        const alertModal = document.getElementById('customAlert');
+        const alertBox = document.getElementById('alertBox');
+        const alertIcon = document.getElementById('alertIcon');
+        const alertTitle = document.getElementById('alertTitle');
+        const alertMessage = document.getElementById('alertMessage');
+        const alertBtn = document.getElementById('alertBtn');
+
+        // Set content
+        alertTitle.textContent = title;
+        alertMessage.textContent = message;
+
+        // Set icon and colors based on type
+        if (type === 'success') {
+            alertIcon.className = 'w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-green-100';
+            alertIcon.innerHTML = '<iconify-icon icon="mdi:check-circle" class="text-4xl text-green-500"></iconify-icon>';
+            alertBtn.className = 'w-full py-3 rounded-lg font-medium transition shadow-md active:scale-95 transform-gpu bg-green-500 text-white hover:bg-green-600';
+        } else if (type === 'error') {
+            alertIcon.className = 'w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-red-100';
+            alertIcon.innerHTML = '<iconify-icon icon="mdi:close-circle" class="text-4xl text-red-500"></iconify-icon>';
+            alertBtn.className = 'w-full py-3 rounded-lg font-medium transition shadow-md active:scale-95 transform-gpu bg-red-500 text-white hover:bg-red-600';
+        } else if (type === 'warning') {
+            alertIcon.className = 'w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-yellow-100';
+            alertIcon.innerHTML = '<iconify-icon icon="mdi:alert-circle" class="text-4xl text-yellow-500"></iconify-icon>';
+            alertBtn.className = 'w-full py-3 rounded-lg font-medium transition shadow-md active:scale-95 transform-gpu bg-yellow-500 text-white hover:bg-yellow-600';
+        } else {
+            alertIcon.className = 'w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-blue-100';
+            alertIcon.innerHTML = '<iconify-icon icon="mdi:information" class="text-4xl text-blue-500"></iconify-icon>';
+            alertBtn.className = 'w-full py-3 rounded-lg font-medium transition shadow-md active:scale-95 transform-gpu bg-blue-500 text-white hover:bg-blue-600';
+        }
+
+        // Show modal with animation
+        alertModal.classList.remove('hidden');
+        setTimeout(() => {
+            alertModal.classList.remove('opacity-0');
+            alertBox.classList.remove('scale-90');
+            alertBox.classList.add('scale-100');
+        }, 10);
+
+        // Close button handler
+        alertBtn.onclick = () => {
+            alertModal.classList.add('opacity-0');
+            alertBox.classList.remove('scale-100');
+            alertBox.classList.add('scale-90');
+            setTimeout(() => {
+                alertModal.classList.add('hidden');
+                if (callback) callback();
+            }, 300);
+        };
+    }
+
     function changeQty(val) {
         const input = document.getElementById('inputQty');
         let current = parseInt(input.value);
@@ -173,17 +241,37 @@
             const data = await response.json();
 
             if (response.status === 401) {
-                alert("Silakan login terlebih dahulu untuk menambah keranjang.");
-                window.location.href = "{{ route('login') }}";
+                showAlert(
+                    "Login Diperlukan",
+                    "Silakan login terlebih dahulu untuk menambah keranjang.",
+                    "warning"
+                );
+                setTimeout(() => {
+                    window.location.href = "{{ route('login') }}";
+                }, 2000);
             } else if (response.ok) {
-                alert("Berhasil! Produk telah ditambahkan ke keranjang.");
-                location.reload();
+                showAlert(
+                    "Berhasil!",
+                    "Produk telah ditambahkan ke keranjang.",
+                    "success"
+                );
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
             } else {
-                alert("Gagal: " + (data.message || "Terjadi kesalahan"));
+                showAlert(
+                    "Gagal",
+                    data.message || "Terjadi kesalahan",
+                    "error"
+                );
             }
         } catch (error) {
             console.error("Error:", error);
-            alert("Koneksi bermasalah.");
+            showAlert(
+                "Kesalahan",
+                "Koneksi bermasalah. Silakan coba lagi.",
+                "error"
+            );
         } finally {
             btn.innerText = originalText;
             btn.disabled = false;

@@ -36,6 +36,21 @@
   <script src="{{ asset('js/detail_product.js') }}" defer></script>
 </head>
 
+@if(session('error'))
+<div id="notification" class="fixed top-4 right-4 z-50 bg-white rounded-xl shadow-lg border border-red-200 p-4 flex items-center gap-3 animate-slide-in">
+    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+        <iconify-icon icon="mdi:alert-circle" class="text-2xl text-red-600"></iconify-icon>
+    </div>
+    <div>
+        <p class="font-semibold text-gray-800 text-sm">Gagal!</p>
+        <p class="text-xs text-gray-600">{{ session('error') }}</p>
+    </div>
+    <button onclick="closeNotification()" class="ml-4 text-gray-400 hover:text-gray-600">
+        <iconify-icon icon="mdi:close" class="text-xl"></iconify-icon>
+    </button>
+</div>
+@endif
+
 <body class="text-slate-800">
 
   @include('partials.navbar')

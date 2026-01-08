@@ -11,10 +11,11 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $produkDiskon = Obat::where('diskon_persen', '>', 0)
+            ->where('stok', '>', 0)
             ->orderByDesc('diskon_persen')
             ->get();
 
-        $query = Obat::query();
+        $query = Obat::query()->where('stok', '>', 0);
 
         if ($request->filled('kategori')) {
             $query->whereIn('kategori', $request->kategori);

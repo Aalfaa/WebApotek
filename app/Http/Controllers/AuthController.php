@@ -21,10 +21,21 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ], [
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Format email tidak valid',
+            'password.required' => 'Password wajib diisi',
+        ]);
+
         $credentials = $request->only('email', 'password');
 
         if (!$token = auth()->guard('api')->attempt($credentials)) {
-            return back()->withErrors(['email' => 'Email atau sandi salah']);
+            return back()
+                ->with('error', 'Email atau password salah')
+                ->withInput($request->only('email'));
         }
 
         $user = auth()->guard('api')->user();
@@ -43,6 +54,13 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
+        ], [
+            'email.unique' => 'Email sudah digunakan, silakan gunakan email lain',
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Format email tidak valid',
+            'name.required' => 'Nama wajib diisi',
+            'password.required' => 'Password wajib diisi',
+            'password.min' => 'Password minimal 8 karakter',
         ]);
 
         $user = User::create([
