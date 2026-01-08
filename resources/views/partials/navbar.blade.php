@@ -7,19 +7,21 @@
       </div>
     </a>
 
+    <!-- Form Pencarian Desktop -->
     <div class="hidden md:flex flex-1 px-6 justify-center">
-      <div class="relative">
+      <form action="{{ route('search') }}" method="GET" class="relative w-full max-w-[500px]">
         <iconify-icon
           icon="mdi:magnify"
-          class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl">
+          class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl pointer-events-none">
         </iconify-icon>
 
         <input
           type="text"
+          name="q"
           placeholder="Cari produk..."
-          class="w-[300px] lg:w-[500px] border rounded-lg py-2 pl-10 pr-3 text-sm
-                 outline outline-1 outline-gray-400 focus:outline-[var(--primary)] bg-white/0">
-      </div>
+          class="w-full border rounded-lg py-2 pl-10 pr-3 text-sm
+                 outline outline-1 outline-gray-400 focus:outline-[var(--primary)] bg-white">
+      </form>
     </div>
 
     <div class="flex items-center gap-2 md:gap-4">
@@ -27,6 +29,11 @@
           $user = auth()->guard('api')->user();
           $cartCount = $user ? \App\Models\Keranjang::where('user_id', $user->id)->sum('jumlah') : 0;
       @endphp
+
+      <!-- Button Search Mobile -->
+      <a href="{{ route('search') }}" class="md:hidden p-2 text-gray-600 hover:text-[var(--primary)] transition">
+        <iconify-icon icon="mdi:magnify" class="text-2xl"></iconify-icon>
+      </a>
 
       @if(!$user)
           <a href="{{ route('login') }}" class="px-4 py-2 bg-[var(--primary)] text-white rounded-md shadow hover:bg-[var(--primary-dark)] transition text-sm whitespace-nowrap">
